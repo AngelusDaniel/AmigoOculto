@@ -15,6 +15,10 @@ class CreateAdmGruposTable extends Migration
     {
         Schema::create('adm_grupos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('grupo_id');
+            $table->foreign('grupo_id')->references('id')->on('grupos');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

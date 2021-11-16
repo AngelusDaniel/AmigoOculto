@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function grupo(){
+        return $this->hasMany(app\Models\Grupo);
+    }
+    public function perfil(){
+        return $this->belongsTo(app\Models\Perfil);
+    }
+
 }
