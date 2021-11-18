@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdmGruposTable extends Migration
+class CreateSorteiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateAdmGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('adm_grupos', function (Blueprint $table) {
+        Schema::create('sorteios', function (Blueprint $table) {
             $table->id();
+            $table->INT('idsorteado');
             $table->unsignedBigInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos');
+            table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateAdmGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adm_grupos');
+        Schema::dropIfExists('sorteios');
     }
 }
