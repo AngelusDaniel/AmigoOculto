@@ -47,5 +47,8 @@ class User extends Authenticatable
     public function perfil(){
         return $this->belongsTo(app\Models\Perfil);
     }
+    public function sorteio(){
+        return $this->belongsTo(app\Models\Sorteio);
+    }
 
 }

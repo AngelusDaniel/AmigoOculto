@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Sorteio extends Model
 {
     use HasFactory;
+    public function user(){
+        return $this->belongsTo(app\Models\User);
+    }
+    public function grupo(){
+        return $this->belongsTo(app\Models\Grupo);
+    }
 }

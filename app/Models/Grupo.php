@@ -15,4 +15,7 @@ class Grupo extends Model
     public function admgrupo(){
         return $this->hasMany(app\Models\AdmGrupo);
     }
+    public function sorteio(){
+        return $this->belongsTo(app\Models\Sorteio);
+    }
 }
