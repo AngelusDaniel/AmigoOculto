@@ -13,7 +13,8 @@ class ControladorUser extends Controller
      */
     public function index()
     {
-        //
+        $dados = User::all();
+        return view('users', compact('dados'));
     }
 
     /**
@@ -23,7 +24,7 @@ class ControladorUser extends Controller
      */
     public function create()
     {
-        //
+        return view ('novoUser');
     }
 
     /**

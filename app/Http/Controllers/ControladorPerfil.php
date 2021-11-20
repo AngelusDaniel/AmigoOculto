@@ -40,7 +40,7 @@ class ControladorPerfil extends Controller
         $dados = new Perfil();
         $dados->nome = $request->input('nomePerfil');
         $dados->save();
-        return redirect ('/areas');
+        return redirect ('/perfils');
     }
 
     /**

@@ -13,7 +13,8 @@ class ControladorGrupo extends Controller
      */
     public function index()
     {
-        //
+        $dados = Grupo::all();
+        return view('grupos', compact('dados'));
     }
 
     /**
@@ -23,7 +24,7 @@ class ControladorGrupo extends Controller
      */
     public function create()
     {
-        //
+        return view ('novoGrupo');
     }
 
     /**
@@ -34,7 +35,10 @@ class ControladorGrupo extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = new Grupo();
+        $dados->nome = $request->input('nomeGrupo');
+        $dados->save();
+        return redirect ('/grupos');
     }
 
     /**
