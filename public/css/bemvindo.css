@@ -1,0 +1,88 @@
+
+:root {
+    --blue: #3490dc;
+    --indigo: #6574cd;
+    --purple: #9561e2;
+    --pink: #f66d9b;
+    --red: #e3342f;
+    --orange: #f6993f;
+    --yellow: #ffed4a;
+    --green: #38c172;
+    --teal: #4dc0b5;
+    --cyan: #6cb2eb;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #3490dc;
+    --secondary: #6c757d;
+    --success: #38c172;
+    --info: #6cb2eb;
+    --warning: #ffed4a;
+    --danger: #e3342f;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Nunito", sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+.botaoinicio {
+    position:relative;
+    text-align: right;
+    color: black;
+    padding: 25px;
+}
+
+.login {
+    position: relative;
+    right: 20px;
+    width: 50px 2px;
+    font-family: Roboto;
+    padding: 6px 13px;
+    text-transform: uppercase;
+    color: black;
+    box-shadow:1px 2px 1px black;
+    
+}
+
+.registro {
+    text-transform: uppercase;
+    color: white;
+    width: 50px 2px;
+    font-family: Roboto;
+    padding: 6px 13px;
+    background-color: black;
+}
+
+.logo {
+    position: fixed;
+    text-align: left;
+    font-size: 30px;
+    top: 25px;
+}
+
+header {
+    height: 11vh;
+    box-shadow:0 3px 0 #5d6368;
+    margin: 0;
+
+}
+
+.bemv {
+    position: relative;
+    text-align: center;
+    top: 200px;
+} 
+
+.bv {
+    font-size: 70px;
+}
+
+.as {
+    font-size: 20px;
+}
+
