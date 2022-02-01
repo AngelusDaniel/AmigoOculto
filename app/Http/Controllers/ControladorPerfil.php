@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Perfil;
+use App\Models\Grupo;
+use App\Models\sorteio;
+use App\Models\User;
 
-class ControladorPerfil extends Controller
+class ParticipanteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    public function index($id)
     {
-        $dados = Perfil::all();
-        return view('perfils', compact('dados'));
+        $dados = Perfil::where('grupo_id', '=', $id)->with('User')->get();
+        if(isset($dados))
+            return view('listaPerfils', compact('dados'));
+        return redirect('/grupo');
     }
 
     /**
@@ -24,9 +33,17 @@ class ControladorPerfil extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view ('novoPerfil');
+        $verifica = Perfil::where('user_id', '=', Auth::id())->where('grupo_id', '=', $id)->first();
+        if(isset($verifica)){
+            return redirect('/grupo')->with('danger', 'Você já está inscrito neste sorteio!!');
+        }else{
+            $dados = Grupo::find($id);
+            if(isset($dados))
+                return view('novaInscricao', compact('dados'));
+            return redirect('/grupo');
+        }
     }
 
     /**
@@ -35,12 +52,14 @@ class ControladorPerfil extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $dados = new Perfil();
-        $dados->nome = $request->input('nomePerfil');
+        $dados->dicaPresente = $request->input('dicaPresente');
+        $dados->user_id = Auth::id();
+        $dados->grupo_id = $id;
         $dados->save();
-        return redirect ('/perfils');
+        return redirect('/grupo')->with('success', 'Inscrição realizada com sucesso!!');
     }
 
     /**
@@ -63,9 +82,9 @@ class ControladorPerfil extends Controller
     public function edit($id)
     {
         $dados = Perfil::find($id);
-        if(insset($dados))
-            return view ('editarPerfil', compact('dados'));
-        return redirect('/perfils');
+        if(isset($dados))
+            return view('editarPresente', compact('dados'));
+        return redirect('/grupo');
     }
 
     /**
@@ -78,11 +97,11 @@ class ControladorPerfil extends Controller
     public function update(Request $request, $id)
     {
         $dados = Perfil::find($id);
-        if(insset($dados)){
-            $dados->nome = $request->input('nomePerfil');
+        if(isset($dados)){
+            $dados->dicaPresente = $request->input('dicaPresente');
             $dados->save();
+            return redirect('/grupo')->with('success', 'atualização realizada com sucesso!!');
         }
-        return redirect('/perfils');
     }
 
     /**
@@ -93,12 +112,17 @@ class ControladorPerfil extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dados = Perfil::find($id);
+        if(isset($dados))
+            $dados->delete();
+        return redirect('/grupo');
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function verAmigo($id){
+        $dados = Sorteio::where('grupo_id', '=', $id)->where('perfil_id', '=', Auth::id())->first();
+        $perfil = Perfil::find($dados->perfilSorteado_id);
+        $amigo = User::find($perfil->user_id);
+        
+        return view('verAmigo', compact('amigo'));
     }
-
 }

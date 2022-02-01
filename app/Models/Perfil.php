@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Perfil extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome, sobrenome'];
+
+    protected $fillable = ['dicaPresente', 'user_id', 'grupo_id'];
+
     public function user(){
-        return $this->belongsTo(app\Models\User);
+        return $this->belongsTo(User::class);
     }
+    
+    public function grupo(){
+        return $this->belongsTo(Grupo::class);
+    }
+}
 }

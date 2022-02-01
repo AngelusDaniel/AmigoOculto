@@ -17,8 +17,10 @@ class CreateGruposTable extends Migration
             $table->id();
             $table->date('data_sorteio');
             $table->string('status');
-            $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->float('vrMinimo', 8, 2);
+            $table->float('vrMaximo', 8, 2);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

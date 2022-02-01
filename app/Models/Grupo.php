@@ -8,14 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Grupo extends Model
 {
     use HasFactory;
-    protected $fillable = ['status'];
-    public function user(){
-        return $this->hasMany(app\Models\User);
+
+    protected $fillable = ['dataSorteio', 'vrMinimo', 'vrMaximo', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-    public function admgrupo(){
-        return $this->hasMany(app\Models\AdmGrupo);
+
+    public function setDataSorteioAttribute($value){
+        $this->attributes['dataSorteio'] = implode('-', array_reverse(explode('/', $value)));
     }
-    public function sorteio(){
-        return $this->belongsTo(app\Models\Sorteio);
+    
+    public function getDataSorteioAttribute(){
+        $dataConvertida = implode('/', array_reverse(explode('-', $this->attributes['dataSorteio'])));
+        return $dataConvertida;
     }
 }
